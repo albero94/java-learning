@@ -1,0 +1,6 @@
+*.json
+*.classpath
+*.project
+*.xml
+*.prefs
+*.class
