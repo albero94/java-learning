@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;;
  * Hello world!
  *
  */
-public class App {
+public class Basics {
     static Scanner sc = new Scanner(System.in);
 
     final double SHORTPI = 3.14150;
