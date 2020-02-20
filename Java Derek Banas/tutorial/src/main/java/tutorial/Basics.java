@@ -1,8 +1,23 @@
 package tutorial;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
-
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;;
 
@@ -14,7 +29,10 @@ public class Basics {
     static Scanner sc = new Scanner(System.in);
 
     final double SHORTPI = 3.14150;
-    public enum Day{Monday, Tuesday, Wednesday};
+
+    public enum Day {
+        Monday, Tuesday, Wednesday
+    };
 
     static void dataTypesAndCasting() {
         System.out.println("Hello World!");
@@ -25,27 +43,27 @@ public class Basics {
 
         // Data types
         // byte, short, char, boolean, int, float double and long
-        boolean happy = true;
-        char a = 'a';
-        double thousand = 1e+3;
-        long bigNum = 123_456_789;
+        final boolean happy = true;
+        final char a = 'a';
+        final double thousand = 1e+3;
+        final long bigNum = 123_456_789;
         System.out.println(thousand + " " + bigNum);
 
         // Casting
-        int smtInt = 10;
-        long smLong = smtInt;
+        final int smtInt = 10;
+        final long smLong = smtInt;
 
-        double cDbl = 1.234;
-        int cInt = (int) cDbl;
+        final double cDbl = 1.234;
+        final int cInt = (int) cDbl;
         System.out.println(cInt);
 
-        long bigLong = 214758348234L;
-        int bInt = (int) bigLong;
+        final long bigLong = 214758348234L;
+        final int bInt = (int) bigLong;
         System.out.println(bInt);
 
-        String favNum = Double.toString(1.618);
+        final String favNum = Double.toString(1.618);
         // Byte.parseByte
-        int strInt = Integer.parseInt("10");
+        final int strInt = Integer.parseInt("10");
 
         // Math Functions
         // common + - * / %
@@ -55,9 +73,9 @@ public class Basics {
         // cbrt, hypot, sin, cos, tan...
 
         // Random number
-        int minNum = 5;
-        int maxNum = 20;
-        int randNum = minNum + (int) (Math.random() * ((maxNum - minNum) + 1));
+        final int minNum = 5;
+        final int maxNum = 20;
+        final int randNum = minNum + (int) (Math.random() * ((maxNum - minNum) + 1));
         System.out.println(randNum);
 
         System.out.println("Fav day is " + Day.Monday);
@@ -65,10 +83,10 @@ public class Basics {
 
     static void strings() {
         // Strings
-        String name = "Alvaro";
+        final String name = "Alvaro";
         String wName = name + " Albero";
         wName += " is my name";
-        String drsDog = "K" + 9;
+        final String drsDog = "K" + 9;
 
         System.out.println(wName.charAt(0));
         System.out.println(wName.contains("Albero"));
@@ -80,13 +98,13 @@ public class Basics {
         System.out.println(wName.replace("Albero", "Gran"));
         wName.substring(0, 5);
 
-        for (String x : wName.split(" "))
+        for (final String x : wName.split(" "))
             System.out.println(x);
 
         // trim toUpperCase toLowerCase
 
         // String builders and buffers
-        StringBuilder sb = new StringBuilder("I'm a string builder");
+        final StringBuilder sb = new StringBuilder("I'm a string builder");
         System.out.println(sb.length());
         System.out.println(sb.capacity());
         sb.append(" Yeah");
@@ -101,36 +119,36 @@ public class Basics {
 
     public static void arraysAndLists() {
         // Arrays
-        int[] a1 = new int[10];
+        final int[] a1 = new int[10];
         a1[0] = 1;
         Arrays.fill(a1, 2);
         System.out.println(a1[5]);
         System.out.println(a1.length);
 
-        String[] a2 = { "one", "two" };
-        int[] oneTo10 = IntStream.rangeClosed(1, 10).toArray();
+        final String[] a2 = { "one", "two" };
+        final int[] oneTo10 = IntStream.rangeClosed(1, 10).toArray();
 
-        for (int x : oneTo10)
+        for (final int x : oneTo10)
             System.out.print(x);
         System.out.println();
         Arrays.binarySearch(oneTo10, 9);
 
-        int a3[][] = new int[2][2];
-        String[][] a4 = { { "00", "10" }, { "01", "11" } };
+        final int a3[][] = new int[2][2];
+        final String[][] a4 = { { "00", "10" }, { "01", "11" } };
         System.out.println(a4[1][1]);
 
-        int a6[] = { 1, 2, 3 };
-        int a7[] = Arrays.copyOf(a6, 3);
+        final int a6[] = { 1, 2, 3 };
+        final int a7[] = Arrays.copyOf(a6, 3);
         System.out.println(a6.equals(a7));
-        int a8[] = { 3, 2, 1 };
+        final int a8[] = { 3, 2, 1 };
         Arrays.sort(a8);
         System.out.println(Arrays.toString(a8));
 
         // ArrayList, resizes
-        ArrayList<String> aL1 = new ArrayList<String>(20);
+        final ArrayList<String> aL1 = new ArrayList<String>(20);
         aL1.add("Sue");
-        ArrayList<Integer> aL2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-        for (Integer x : aL2)
+        final ArrayList<Integer> aL2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        for (final Integer x : aL2)
             System.out.print(x);
         System.out.println();
         aL2.get(1); // Index
@@ -138,12 +156,12 @@ public class Basics {
         aL2.remove(3);
         // al2.clear(); delete every element
 
-        Iterator<Integer> it = aL2.iterator();
+        final Iterator<Integer> it = aL2.iterator();
         while (it.hasNext())
             System.out.println(it.next());
 
         // LinkedList
-        LinkedList<Integer> iL1 = new LinkedList<Integer>();
+        final LinkedList<Integer> iL1 = new LinkedList<Integer>();
         iL1.add(1);
         iL1.add(2);
         iL1.add(3);
@@ -162,11 +180,11 @@ public class Basics {
         // User input
         System.out.print("Enter name: ");
         if (sc.hasNextLine()) { // hasShort, Int...
-            String userName = sc.nextLine();
+            final String userName = sc.nextLine();
             System.out.println("Hello " + userName);
         }
 
-        String jopName = JOptionPane.showInputDialog("Enter name");
+        final String jopName = JOptionPane.showInputDialog("Enter name");
         System.out.println("Hello " + jopName);
     }
 
@@ -174,7 +192,7 @@ public class Basics {
         // Conditionals
         // Relational operators: == != > < >= <=
         // Logical operators: ! && ||
-        int age = 12;
+        final int age = 12;
         if ((age >= 5) && age <= 6)
             System.out.println("Go to Kindergarten");
         else if (age >= 7 && age <= 13)
@@ -184,10 +202,10 @@ public class Basics {
         else
             System.out.println("Stay Home");
 
-        boolean canVote = (age >= 18) ? true : false;
+        final boolean canVote = (age >= 18) ? true : false;
         System.out.println("Can vote: " + canVote);
 
-        String lang = "France";
+        final String lang = "France";
         switch (lang) {
             case "Chile":
             case "Cuba":
@@ -214,7 +232,7 @@ public class Basics {
         }
         System.out.println();
 
-        int secretNum = 8;
+        final int secretNum = 8;
         int guess = 0;
         do {
             System.out.print("Guess: ");
@@ -226,32 +244,32 @@ public class Basics {
         System.out.println("You guessed right!");
     }
 
-    public static int getSum(int x, int y) {
+    public static int getSum(final int x, final int y) {
         return x + y;
     }
 
-    public static int getSum2(int... nums) {
+    public static int getSum2(final int... nums) {
         int sum = 0;
-        for (int x : nums) {
+        for (final int x : nums) {
             sum += x;
         }
         return sum;
     }
 
-    public static int[] getNext2(int x) {
-        int[] vals = new int[2];
+    public static int[] getNext2(final int x) {
+        final int[] vals = new int[2];
         vals[0] = x + 1;
         vals[1] = x + 2;
         return vals;
     }
 
     static List<Object> getRandList() {
-        String name = "Jose";
-        int age = 55;
+        final String name = "Jose";
+        final int age = 55;
         return Arrays.asList(name, age);
     }
 
-    static int factorial(int num) {
+    static int factorial(final int num) {
         if (num == 1)
             return 1;
         else {
@@ -265,33 +283,302 @@ public class Basics {
         // paramameters are passed by value and not affected outside of the function
         System.out.println("Sum: " + getSum2(2, 3, 4, 5));
 
-        int[] multVA = getNext2(5);
-        for (int x : multVA)
+        final int[] multVA = getNext2(5);
+        for (final int x : multVA)
             System.out.println(x);
 
-        List<Object> randList = getRandList();
+        final List<Object> randList = getRandList();
         System.out.println(randList);
 
         System.out.println("Fact 7 = " + factorial(7));
     }
 
-    public static void exceptionHandling(){
+    public static void exceptionHandling() {
         try {
-            int badInt = 10/0;
-        }
-        catch(ArithmeticException ex){
+            final int badInt = 10 / 0;
+        } catch (final ArithmeticException ex) {
             System.out.println(ex.getMessage());
-        }
-        catch(Exception ex){
+        } catch (final Exception ex) {
             System.out.println(ex.getMessage());
-        }
-        finally{
+        } finally {
             System.out.println("Clean up");
         }
     }
 
-    public static void main(String[] args) {
-        exceptionHandling();
+    public static void streams() {
+        final List<Integer> oneTo10 = IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
+        // stream from 1 to 10
+        // boxed returns a list that is boxed to an integer
+        // collect process the list elements into a container that is a list container
+
+        final List<Integer> squares = oneTo10.stream().map(x -> x * x).collect(Collectors.toList());
+        for (final Integer x : squares)
+            System.out.print(x + " ");
+        System.out.println();
+
+        final List<Integer> evens = oneTo10.stream().filter(x -> x % 2 == 0).collect(Collectors.toList());
+        for (final Integer x : evens)
+            System.out.print(x + " ");
+        System.out.println();
+
+        final IntStream limitTo5 = IntStream.range(1, 10).limit(5);
+        limitTo5.forEach(System.out::print);
+        System.out.println();
+
+        final int multAll = IntStream.range(1, 5).reduce(1, (x, y) -> x * y);
+        System.out.println(multAll);
+
+        final DoubleStream stream = IntStream.range(1, 5).mapToDouble(i -> i);
+
+        final IntSummaryStatistics iStats = IntStream.range(1, 10).summaryStatistics();
+        System.out.println(iStats.getAverage());
+        System.out.println(iStats.getSum());
+        System.out.println(iStats.getMax());
+        System.out.println(iStats.getMin());
     }
 
+    public static void lambdaExpressions() {
+        final ArrayList<Integer> oneTo5 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        oneTo5.forEach(x -> System.out.println(x * 2));
+        oneTo5.forEach(x -> {
+            if (x % 2 == 0)
+                System.out.println(x);
+        });
+
+        List<Integer> fib = new LinkedList<Integer>();
+
+        fib = Stream.iterate(new int[] { 0, 1 }, t -> new int[] { t[1], t[0] + t[1] }).limit(10).map(n -> n[0])
+                .collect(Collectors.toList());
+        fib.forEach(x -> System.out.println(x));
+    }
+
+    public static void fileFunctions() {
+        final File f1 = new File("f1.log");
+
+        try {
+            if (f1.createNewFile()) {
+                System.out.println("File created");
+                f1.renameTo(new File("f1BU.log"));
+            } else {
+                System.out.println("File not created");
+            }
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+
+        final File d1 = new File("\\");
+
+        if (d1.isDirectory()) {
+            final File[] files = d1.listFiles();
+            for (final File x : files)
+                System.out.println(x.getName());
+        }
+
+        File f2 = new File("f2.txt");
+
+        try {
+            final PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f2)));
+            pw.println("This is sample text");
+            pw.close();
+        } catch (final IOException ex) {
+            ex.printStackTrace();
+        }
+
+        f2 = new File("f2.txt");
+        try {
+            final BufferedReader bR = new BufferedReader(new FileReader(f2));
+            String text = bR.readLine();
+            while (text != null) {
+                System.out.println(text);
+                text = bR.readLine();
+            }
+            bR.close();
+        } catch (final IOException ex) {
+            ex.printStackTrace();
+        }
+
+        File f3 = new File("f3.dat");
+        FileOutputStream fOS;
+
+        try {
+            fOS = new FileOutputStream(f3); // (f3, true) appends instead of overwriting
+            final BufferedOutputStream bOS = new BufferedOutputStream(fOS);
+            final DataOutputStream dOS = new DataOutputStream(bOS);
+
+            final String name = "Alvaro";
+            final int age = 25;
+            final double bal = 1234.56;
+
+            dOS.writeUTF(name);
+            dOS.writeInt(age);
+            dOS.writeDouble(bal);
+            dOS.close();
+        } catch (final IOException ex) {
+            ex.printStackTrace();
+        }
+
+        f3 = new File("f3.dat");
+        try {
+            final DataInputStream dIS = new DataInputStream(new BufferedInputStream(new FileInputStream(f3)));
+
+            System.out.println(dIS.readUTF());
+            System.out.println(dIS.readInt());
+            System.out.println(dIS.readDouble());
+            dIS.close();
+        } catch (final IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static void generics() {
+        final String[] gA1 = { "one", "two" };
+        final Integer[] gA2 = { 1, 2, 3, 4 };
+        printStuff(gA1);
+        printStuff(gA2);
+        final ArrayList<Integer> aL1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        printAL(aL1);
+
+        final MyGeneric<Integer> myGI = new MyGeneric<Integer>();
+        myGI.setVal(10);
+        System.out.println(myGI.getVal());
+
+        final MyGeneric<String> myGS = new MyGeneric<String>();
+        myGS.setVal("Dog");
+        System.out.println(myGS.getVal());
+    }
+
+    public static <E> void printStuff(final E[] arr) {
+        for (final E x : arr)
+            System.out.println(x);
+    }
+
+    public static void printAL(final ArrayList<?> aL) {
+        for (final Object x : aL)
+            System.out.println(x);
+    }
+
+    public static void threads() {
+        final Thread t1 = new Thread(new MyThread(), "Thread 1");
+        final Thread t2 = new Thread(new MyThread(), "Thread 2");
+        final Thread t3 = new Thread(new MyThread(), "Thread 3");
+
+        t1.start();
+        t2.start();
+        System.out.println("Main thread keeps running!");
+
+        try {
+            t1.join();
+        } catch (final InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        t3.start();
+
+    }
+
+    public static void threads2() {
+        ThreadTest tT1 = new ThreadTest(new Customer("Sam"));
+        tT1.start();
+        ThreadTest tT2 = new ThreadTest(new Customer("Sue"));
+        tT2.start();
+        ThreadTest tT3 = new ThreadTest(new Customer("Sid"));
+        tT3.start();
+    }
+
+    public static void main(final String[] args) {
+        threads2();
+    }
+
+}
+
+class MyGeneric<T> {
+    T val;
+
+    public void setVal(final T val) {
+        this.val = val;
+    }
+
+    public T getVal() {
+        return val;
+    }
+}
+
+class MyThread implements Runnable {
+
+    @Override
+    public void run() {
+        System.out.println("Start thread: " + Thread.currentThread().getName());
+        System.out.println("Active threads: " + Thread.activeCount());
+
+        try {
+            Thread.sleep(3000);
+        } catch (final InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("End thread : " + Thread.currentThread().getName());
+    }
+
+}
+
+class Customer {
+    public String name;
+
+    public Customer(final String name) {
+        this.name = name;
+    }
+}
+
+class BankAccount {
+    static BankAccount account;
+    static int balance = 100;
+    static Customer customer;
+
+    public static BankAccount getAccount(final Customer customer) {
+        if (account == null) {
+            account = new BankAccount();
+            return account;
+        }
+        BankAccount.customer = customer;
+        return account;
+    }
+
+    public static int getBalance() {
+        return balance;
+    }
+
+    public synchronized void withdraw(final int bal) {
+        try {
+            if (balance >= bal) {
+                System.out.println(customer.name + " requested $" + bal);
+                Thread.sleep(1000);
+                balance -= bal;
+                System.out.println(customer.name + " received $" + bal);
+            } else {
+                System.out.println(customer.name + " try to exceed balance.");
+            }
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(customer.name + " current balance is $" + balance);
+        System.out.println();
+    }
+}
+
+class ThreadTest extends Thread implements Runnable{
+    Customer customer;
+    public ThreadTest(Customer customer){
+        this.customer = customer;
+    }
+
+    public void run(){
+        for(int i = 0; i< 4; i++){
+            try{
+                BankAccount account = BankAccount.getAccount(customer);
+                account.withdraw(10);
+                Thread.sleep(1000);
+            } catch (final Exception ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
 }
