@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -79,6 +81,18 @@ public class Basics {
         System.out.println(randNum);
 
         System.out.println("Fav day is " + Day.Monday);
+
+        // HackerRank
+        System.out.printf("%-15s %03d%n", "String", 10);
+
+        // Date
+        // LocalDate is the new API
+        System.out.println(LocalDate.of(2020, 02, 15).getDayOfWeek().toString());
+
+        // Currency
+        String us = NumberFormat.getCurrencyInstance(Locale.US).format(1000);
+        System.out.println(us);
+    }
     }
 
     static void strings() {
